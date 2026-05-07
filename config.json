@@ -1,21 +1,34 @@
 {
   "kill_switch": false,
-  "kill_message": "VU Prime is temporarily disabled.",
-  "mode": "paid",
+  "kill_message": "VU Prime is temporarily down for maintenance. Please try again in 30 minutes.",
   "min_version": "2.1.0",
   "announcement": "",
-  "paywall_message": "Free phase khatam — premium activate karein.",
+  "mode": "free",
+  "paywall_message": "Free phase khatam — premium activate karne ke liye payment karein.",
+  "banned_message": "Aapka account band kar diya gaya hai. Tafseelat ke liye support se rabta karein.",
 
   "premium_users": {
-    "vuplhr55@gmail.com": {
-      "expires": "2026-05-05"
-    },
-
     "vuplhr55.15@gmail.com": {
-      "expires": "2026-07-15"
+      "expires": "2026-06-08",
+      "plan": "monthly"
     }
   },
 
-  "banned_message": "Aapka account banned hai.",
-  "banned_emails": []
+  "premium_emails": [
+    "vuplhr55@gmail.com"
+  ],
+
+  "banned_emails": [],
+  "force_logout_emails": [],
+
+  "_INSTRUCTIONS": {
+    "kill_switch":         "true = sab ko maintenance screen | false = normal",
+    "mode":                "free = sab ko access | paid = sirf premium users ko",
+    "min_version":         "Iss version se neeche extensions update screen dekh ge",
+    "premium_users":       "Format: { 'email@gmail.com': { 'expires': 'YYYY-MM-DD', 'plan': 'monthly|yearly|lifetime' } }",
+    "premium_emails":      "Lifetime premium array (no expiry). Owner ya VIPs ke liye.",
+    "banned_emails":       "Block users (lowercase emails)",
+    "force_logout_emails": "Foran logout. Add karte hi 5 min mein, list se nikalo to wapas login.",
+    "_note":               "Yeh _INSTRUCTIONS field optional hai, extension ignore karta hai."
+  }
 }
