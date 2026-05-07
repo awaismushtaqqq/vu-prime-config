@@ -5,10 +5,17 @@
   "min_version": "2.1.0",
   "announcement": "",
   "paywall_message": "Free phase khatam — premium activate karein.",
-  "premium_emails": [
-  "vuplhr55@gmail.com",
-  "vuplhr55.15@gmail.com"
-],
+
+  "premium_users": {
+    "vuplhr55@gmail.com": {
+      "expires": "2026-06-30"
+    },
+
+    "vuplhr55.15@gmail.com": {
+      "expires": "2026-07-15"
+    }
+  },
+
   "banned_message": "Aapka account banned hai.",
   "banned_emails": []
 }
