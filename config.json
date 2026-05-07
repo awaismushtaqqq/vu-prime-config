@@ -1,7 +1,7 @@
 {
   "kill_switch": false,
   "kill_message": "VU Prime is temporarily down for maintenance.",
-  "mode": "free",
+  "mode": "paid",
   "min_version": "2.1.0",
   "announcement": "",
   "paywall_message": "Free phase khatam — premium activate karne ke liye payment karein.",
