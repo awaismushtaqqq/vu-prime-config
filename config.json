@@ -1,11 +1,11 @@
 {
   "kill_switch": false,
-  "kill_message": "VU Prime is temporarily down for maintenance.",
+  "kill_message": "VU Prime is temporarily disabled.",
   "mode": "paid",
   "min_version": "2.1.0",
   "announcement": "",
-  "paywall_message": "Free phase khatam — premium activate karne ke liye payment karein.",
-  "banned_message": "Aapka account band kar diya gaya hai.",
-  "premium_emails": [vuplhr55@gmail.com],[],
+  "paywall_message": "Free phase khatam — premium activate karein.",
+  "premium_emails": ["vuplhr55@gmail.com"],
+  "banned_message": "Aapka account banned hai.",
   "banned_emails": []
 }
