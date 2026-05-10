@@ -1,5 +1,5 @@
 {
-  "kill_switch": false,
+  "kill_switch": true,
   "kill_message": "VU Prime is temporarily down for maintenance. Please try again in 30 minutes.",
   "min_version": "2.3.0",
   "announcement": "",
