@@ -34,5 +34,6 @@
     "banned_emails":       "Block users (lowercase emails)",
     "force_logout_emails": "Foran logout. Add karte hi 5 min mein, list se nikalo to wapas login.",
     "_note":               "Yeh _INSTRUCTIONS field optional hai, extension ignore karta hai."
+    "Cant_Campus":         "michealcole2812@gmail.com yeah cant campus ki email hai",
   }
 }
