@@ -1,6 +1,6 @@
 {
-  "kill_switch": true,
-  "kill_message": "VU Prime temporarily band hai. Marking par stuck ho jaane wala bug fix karke nayi version v2.4.0 Chrome Web Store par upload kar di hai — bohat jald approval ke baad public ho jayegi. Aap ki extension automatically update ho jayegi, phir se kaam start ho jayega. Tab tak thoda sabar karein 🙏 — Awais Mushtaq",
+  "kill_switch": false,
+  "kill_message": "VU Prime temporarily off hai.",
   "min_version": "2.4.0",
   "announcement": "",
   "mode": "free",
