@@ -1,9 +1,9 @@
 {
-  "kill_switch": false,
-  "kill_message": "VU Prime temporarily off hai.",
-  "min_version": "2.4.0",
+  "kill_switch": true,
+  "kill_message": "This version disable please re-install new version from chrome store",
+  "min_version": "2.6.0",
   "announcement": "",
-  "mode": "free",
+  "mode": "paid",
   "paywall_message": "Free phase khatam — premium activate karne ke liye payment karein.",
   "banned_message": "Aapka account band kar diya gaya hai. Tafseelat ke liye support se rabta karein.",
 
