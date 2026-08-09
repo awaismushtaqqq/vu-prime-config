@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>VU Prime — Admin</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">VP</div><div>VU Prime <small>Admin panel</small></div></div>
+  </header>
+
+  <div class="card" style="margin-top:20px">
+    <h2>Admin token</h2>
+    <label for="token">Token (sirf aap ke paas)</label>
+    <input id="token" type="password" placeholder="ADMIN_TOKEN" autocomplete="off" />
+    <label style="margin-top:10px; display:flex; gap:8px; align-items:center; color:var(--muted)">
+      <input id="remember" type="checkbox" style="width:auto" /> Is browser mein yaad rakhein
+    </label>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h2>Manual activation (bank transfer verify karne ke baad)</h2>
+    <label for="email">User ka Gmail</label>
+    <input id="email" type="email" placeholder="user@gmail.com" />
+
+    <label for="plan" style="margin-top:12px">Plan</label>
+    <select id="plan">
+      <option value="monthly">Monthly</option>
+      <option value="yearly">Yearly</option>
+      <option value="lifetime">Lifetime</option>
+    </select>
+
+    <label for="ref" style="margin-top:12px">Reference (TID / screenshot ka number) — optional</label>
+    <input id="ref" type="text" placeholder="e.g. JC-88123456" />
+
+    <button id="activate">Activate karein</button>
+    <button id="lookup" class="ghost" type="button">Sirf status dekhein</button>
+    <div id="msg" class="msg"></div>
+    <div class="hint">
+      Activation seedha <code>config.json</code> mein commit hoti hai — extension 5 minute ke
+      andar khud utha leta hai.
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const msg = $('msg');
+  const show = (t, k) => { msg.textContent = t; msg.className = `msg show ${k}`; };
+
+  const stored = localStorage.getItem('vup_admin_token');
+  if (stored) { $('token').value = stored; $('remember').checked = true; }
+
+  function token() {
+    const t = $('token').value.trim();
+    if ($('remember').checked) localStorage.setItem('vup_admin_token', t);
+    else localStorage.removeItem('vup_admin_token');
+    return t;
+  }
+
+  function describe(d) {
+    if (d.banned) return 'Yeh account BANNED hai.';
+    if (d.premium) return d.expires ? `Premium active — ${d.expires} tak (${d.plan}).` : 'Lifetime premium active.';
+    return 'Koi active subscription nahi.';
+  }
+
+  $('activate').addEventListener('click', async () => {
+    const t = token();
+    if (!t) return show('Pehle admin token likhein.', 'err');
+    show('Activate ho raha hai…', 'info');
+    try {
+      const res = await fetch('/api/admin/activate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Token': t },
+        body: JSON.stringify({
+          email: $('email').value.trim(),
+          plan: $('plan').value,
+          reference: $('ref').value.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Fail');
+      show(
+        `✅ ${data.email} activate ho gaya — ${data.expires ? `expiry ${data.expires}` : 'lifetime'}` +
+        (data.duplicate ? ' (yeh order pehle hi process ho chuka tha)' : ''),
+        'ok'
+      );
+    } catch (e) { show(e.message, 'err'); }
+  });
+
+  $('lookup').addEventListener('click', async () => {
+    const t = token();
+    if (!t) return show('Pehle admin token likhein.', 'err');
+    show('Check ho raha hai…', 'info');
+    try {
+      const res = await fetch(`/api/admin/lookup?email=${encodeURIComponent($('email').value.trim())}`, {
+        headers: { 'X-Admin-Token': t },
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Fail');
+      show(describe(data), data.premium ? 'ok' : 'info');
+    } catch (e) { show(e.message, 'err'); }
+  });
+})();
+</script>
+</body>
+</html>

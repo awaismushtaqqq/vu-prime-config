@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Payment mukammal — VU Prime</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">VP</div><div>VU Prime</div></div>
+  </header>
+
+  <div class="card" style="margin-top:24px">
+    <div class="status-icon" id="icon">⏳</div>
+    <h2 class="center" id="title">Activation check ho rahi hai…</h2>
+    <p class="center hint" id="sub">Thora intezar karein, config update ho raha hai.</p>
+
+    <div class="rows" id="rows"></div>
+
+    <div id="msg" class="msg"></div>
+
+    <button id="again" class="ghost" type="button" style="display:none">Dobara check karein</button>
+    <a href="/"><button class="ghost" type="button" style="margin-top:10px">Home</button></a>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h2>Ab kya karein?</h2>
+    <div class="steps" style="margin:0">
+      <div class="step"><b>1.</b><small>Extension kholein aur usi Gmail se sign-in karein.</small></div>
+      <div class="step"><b>2.</b><small>Account drawer mein "Refresh" dabayein ya browser restart karein.</small></div>
+      <div class="step"><b>3.</b><small>Premium features unlock ho jayenge.</small></div>
+    </div>
+  </div>
+
+  <footer>Masla ho to WhatsApp par order ID ke saath rabta karein.</footer>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const q = new URLSearchParams(location.search);
+  const email = (q.get('email') || sessionStorage.getItem('vup_email') || '').trim().toLowerCase();
+  const order = q.get('order') || sessionStorage.getItem('vup_order') || '';
+  const plan = q.get('plan') || '';
+
+  function rows(items) {
+    $('rows').innerHTML = items
+      .filter(([, v]) => v)
+      .map(([k, v]) => `<div class="row"><span>${k}</span><span>${String(v).replace(/[<>&]/g, '')}</span></div>`)
+      .join('');
+  }
+
+  let tries = 0;
+  async function check() {
+    if (!email) {
+      $('icon').textContent = '❓';
+      $('title').textContent = 'Email nahi mila';
+      $('sub').textContent = 'Home page par ja kar status check karein.';
+      return;
+    }
+    try {
+      const res = await fetch(`/api/status?email=${encodeURIComponent(email)}`);
+      const data = await res.json();
+      if (res.ok && data.premium) {
+        $('icon').textContent = '✅';
+        $('title').textContent = 'Activation mukammal!';
+        $('sub').textContent = 'Aapka VU Prime premium chalu ho gaya hai.';
+        rows([
+          ['Email', email],
+          ['Plan', data.plan || plan],
+          ['Expiry', data.expires || 'Lifetime'],
+          ['Order ID', order],
+        ]);
+        $('again').style.display = 'none';
+        return;
+      }
+      tries++;
+      if (tries < 10) return setTimeout(check, 3000);
+
+      $('icon').textContent = '⚠️';
+      $('title').textContent = 'Activation abhi nazar nahi aa rahi';
+      $('sub').textContent =
+        'Agar paisa kat gaya hai to fikar na karein — order ID ke saath WhatsApp par rabta karein, activation kar di jayegi.';
+      rows([['Email', email], ['Plan', plan], ['Order ID', order]]);
+      $('again').style.display = 'block';
+    } catch {
+      tries++;
+      if (tries < 10) return setTimeout(check, 3000);
+      $('icon').textContent = '⚠️';
+      $('title').textContent = 'Status check nahi ho saka';
+      $('again').style.display = 'block';
+    }
+  }
+
+  $('again').addEventListener('click', () => {
+    tries = 0;
+    $('icon').textContent = '⏳';
+    $('title').textContent = 'Dobara check ho raha hai…';
+    $('again').style.display = 'none';
+    check();
+  });
+
+  rows([['Email', email], ['Plan', plan], ['Order ID', order]]);
+  check();
+})();
+</script>
+</body>
+</html>

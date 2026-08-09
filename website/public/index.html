@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VU Prime — Subscription & Activation</title>
+<meta name="description" content="VU Prime extension ki online payment aur foran activation." />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">VP</div>
+      <div>VU Prime
+        <small>Virtual University staff productivity suite</small>
+      </div>
+    </div>
+    <a class="hint" href="/privacy.html">Privacy Policy</a>
+  </header>
+
+  <section class="hero">
+    <h1>Online payment karein, <span>foran activation</span></h1>
+    <p>Wahi Gmail likhein jis se aap extension mein sign-in karte hain. Payment confirm hote hi
+       aapka account 1–2 minute mein premium ho jata hai — koi manual intezar nahi.</p>
+  </section>
+
+  <div class="steps">
+    <div class="step"><b>1. Plan chunein</b><small>Monthly, yearly ya lifetime.</small></div>
+    <div class="step"><b>2. Gmail likhein</b><small>Wahi jis se extension mein login karte hain.</small></div>
+    <div class="step"><b>3. Payment karein</b><small>Card, JazzCash, Easypaisa ya bank.</small></div>
+    <div class="step"><b>4. Extension refresh</b><small>Premium khud-ba-khud on ho jata hai.</small></div>
+  </div>
+
+  <div class="plans" id="plans"></div>
+
+  <div class="card">
+    <h2>Checkout</h2>
+    <label for="email">Aapka Gmail (extension wala)</label>
+    <input id="email" type="email" placeholder="aapka.email@gmail.com" autocomplete="email" inputmode="email" />
+    <div class="hint">⚠️ Ghalat email par activation us email par lag jayegi — dhyan se likhein.</div>
+
+    <button id="pay">Pay karein</button>
+    <button id="bank-toggle" class="ghost" type="button" style="display:none">Bank transfer se pay karna hai?</button>
+
+    <div id="msg" class="msg"></div>
+
+    <div id="bank" style="display:none; margin-top:18px">
+      <h2>Bank / Wallet transfer</h2>
+      <div class="rows" id="bank-rows"></div>
+      <div class="hint">
+        Paisa bhejne ke baad screenshot aur apna Gmail WhatsApp par bhejein — verify hote hi
+        activation kar di jayegi. (Yeh manual tareeqa hai, is mein thora waqt lag sakta hai.)
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h2>Pehle se subscribe hain? Status check karein</h2>
+    <label for="check-email">Gmail</label>
+    <input id="check-email" type="email" placeholder="aapka.email@gmail.com" />
+    <button id="check" class="ghost" type="button">Status dekhein</button>
+    <div id="check-msg" class="msg"></div>
+  </div>
+
+  <footer>
+    VU Prime © <span id="year"></span> — Support: <span id="support"></span>
+  </footer>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

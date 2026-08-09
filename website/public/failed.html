@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Payment mukammal nahi hui — VU Prime</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">VP</div><div>VU Prime</div></div>
+  </header>
+
+  <div class="card" style="margin-top:24px">
+    <div class="status-icon" id="icon">❌</div>
+    <h2 class="center" id="title">Payment mukammal nahi hui</h2>
+    <p class="center hint" id="sub"></p>
+    <div class="rows" id="rows"></div>
+    <a href="/"><button type="button">Dobara koshish karein</button></a>
+  </div>
+
+  <footer>Agar paisa kat gaya hai aur activation nahi hui to WhatsApp par order ID bhejein.</footer>
+</div>
+
+<script>
+(() => {
+  const q = new URLSearchParams(location.search);
+  const reason = q.get('reason') || '';
+  const order = q.get('order') || sessionStorage.getItem('vup_order') || '';
+  const code = q.get('code') || '';
+
+  const messages = {
+    declined: 'Bank ya wallet ne transaction decline kar di. Balance/limit check kar ke dobara koshish karein.',
+    signature: 'Payment response verify nahi ho saka. Agar paisa kat gaya hai to support se rabta karein.',
+    amount: 'Amount match nahi hui, is liye activation rok di gayi. Support se rabta karein.',
+    data: 'Order ki tafseelat adhuri thi. Dobara koshish karein.',
+    config: 'Gateway settings mein masla hai. Thori der baad koshish karein.',
+    activation: 'Payment ho gayi lekin activation atak gayi. Fikar na karein — order ID ke saath WhatsApp karein, foran activate kar diya jayega.',
+  };
+
+  document.getElementById('sub').textContent =
+    messages[reason] || 'Transaction mukammal nahi ho saki. Dobara koshish karein.';
+
+  if (reason === 'activation') {
+    document.getElementById('icon').textContent = '⚠️';
+    document.getElementById('title').textContent = 'Payment ho gayi — activation pending';
+  }
+
+  document.getElementById('rows').innerHTML = [
+    ['Order ID', order],
+    ['Code', code],
+  ]
+    .filter(([, v]) => v)
+    .map(([k, v]) => `<div class="row"><span>${k}</span><span>${String(v).replace(/[<>&]/g, '')}</span></div>`)
+    .join('');
+})();
+</script>
+</body>
+</html>

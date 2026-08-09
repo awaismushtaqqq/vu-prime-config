@@ -1,0 +1,14 @@
+{
+  "name": "vu-prime-payments",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "VU Prime subscription website — online payment aur automatic activation (config.json).",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node test/smoke.test.js",
+    "dev": "vercel dev"
+  }
+}
