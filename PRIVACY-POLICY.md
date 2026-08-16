@@ -1,9 +1,9 @@
 # VU Prime — Privacy Policy
 
-**Last Updated**: May 2026  
-**Version**: 2.6.0  
+**Last Updated**: August 2026  
+**Version**: 2.7.3  
 **Owner**: Awais Mushtaq  
-**Contact**: +92 346 0306869 (WhatsApp)
+**Email**: awaisatpersonal@gmail.com
 
 VU Prime ("the Extension") respects your privacy. This policy describes what information the Extension collects, why, and how it is used.
 
@@ -109,7 +109,7 @@ We do **not** sell, rent, share, or transfer your data to third parties for adve
 - Servers are located in Cloudflare's global edge network with industry-standard physical and network security
 - All connections use **HTTPS encryption** (TLS 1.3)
 - JWT tokens are signed with HMAC-SHA256 and rotate every 60 minutes
-- We retain authentication and audit log data for up to **24 months**, after which it is permanently deleted
+- We retain authentication and audit log data for up to **7 days**, after which it is permanently deleted
 - Community chat messages are retained indefinitely unless deleted by the user, an admin, or as part of an account deletion request
 
 ---
@@ -135,7 +135,7 @@ You have the right to:
 - **Uninstall** — uninstalling the Extension removes all local data; server-side data can be deleted upon request
 - **Object** — opt out of the Community Chat by simply not using it (it does not run in the background)
 
-To exercise these rights, contact us via WhatsApp (+92 346 0306869).
+To exercise these rights, contact us via email: awaisatpersonal@gmail.com.
 
 ---
 
@@ -199,7 +199,7 @@ Continued use of the Extension after changes constitutes acceptance.
 
 For privacy questions, data deletion requests, or any other concerns:
 
-- **WhatsApp**: +92 346 0306869
+- **Email**: awaisatpersonal@gmail.com
 - **Account Name**: Awais Mushtaq
 
 ---
